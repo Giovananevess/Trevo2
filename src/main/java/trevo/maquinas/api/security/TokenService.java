@@ -11,17 +11,16 @@ import java.util.Date;
 
 @Service
 public class TokenService {
-    private static final long TOKEN_EXPIRATE = 8000_00;
+    private static final long TOKEN_EXPIRATE = 8000_000;
     @Value("${api.security.token.secret}")
     private String secret;
     public String token(User user ) {
         try {
-            System.out.println(secret);
+//            System.out.println(secret);
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("API.Trevo")
                     .withSubject(user.getLogin())
-//                    .withClai
                     .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATE))
                     .sign(algorithm);
         } catch (JWTCreationException exception){

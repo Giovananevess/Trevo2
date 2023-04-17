@@ -18,7 +18,6 @@ import trevo.maquinas.api.response.ResponseModelObject;
 import trevo.maquinas.api.response.ResponseModelToken;
 import trevo.maquinas.api.security.AuthenticationDTO;
 import trevo.maquinas.api.security.TokenService;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -76,6 +75,5 @@ public class UserService {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(dto.login(), dto.password());
         Authentication authentication = manager.authenticate(token);
         return new ResponseEntity<>(new ResponseModelToken(tokenService.token((User) authentication.getPrincipal())), HttpStatus.OK);
-
     }
 }

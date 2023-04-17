@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import trevo.maquinas.api.dto.ProfileEnum;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -25,13 +26,17 @@ public class User implements UserDetails {
     private String name;
     private String password;
     private String login;
+    @Enumerated(EnumType.STRING)
+    private ProfileEnum profile;
     private String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
 
     public User(User dados) {
         this.name = dados.name;
         this.password = dados.password;
         this.date = dados.date;
         this.login = dados.login;
+        this.profile = dados.profile;
     }
 
     public void update(User dados) {
@@ -42,7 +47,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + profile.toString()));
     }
 
     @Override
