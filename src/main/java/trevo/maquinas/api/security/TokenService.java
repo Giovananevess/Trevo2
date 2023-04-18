@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Service
 public class TokenService {
-    private static final long TOKEN_EXPIRATE = 8000_000;
+    private static final long TOKEN_EXPIRATE = 18000_000;
     @Value("${api.security.token.secret}")
     private String secret;
     public String token(User user ) {
@@ -21,6 +21,7 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("API.Trevo")
                     .withSubject(user.getLogin())
+                    .withClaim("ID", user.getId())
                     .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATE))
                     .sign(algorithm);
         } catch (JWTCreationException exception){

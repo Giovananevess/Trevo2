@@ -1,5 +1,6 @@
 package trevo.maquinas.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +19,26 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Registra um novo produto", tags = "Produto")
     public ResponseEntity<?> register(@RequestBody @Valid ProductDadosDTO dto) {
         return productService.register(dto);
     }
 
     @GetMapping
+    @Operation(summary = "lista todos os produtos já cadastrados", tags = "Produto")
     public ResponseEntity<?> list() {
         return productService.list();
     }
 
     @DeleteMapping ("/delete/{id}")
+    @Operation(summary = "Deleta um produto", tags = "Produto")
     public ResponseEntity<?> delete(@PathVariable UUID id) {
         return productService.delete(id);
     }
 
     @PutMapping ("/update/{id}")
     @Transactional
+    @Operation(summary = "Atualiza o produto", tags = "Produto")
     public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody @Valid ProductDadosDTO dto) {
         return productService.update(id, dto);
     }

@@ -2,11 +2,11 @@ package trevo.maquinas.api.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import trevo.maquinas.api.dto.ProfileEnum;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
@@ -22,12 +22,20 @@ import java.util.UUID;
 public class User implements UserDetails {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
+
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
+
+    @Column(name = "password", unique = true, nullable = false)
     private String password;
+
+    @Column(name = "login", unique = true, nullable = false)
     private String login;
+
     @Enumerated(EnumType.STRING)
     private ProfileEnum profile;
+
     private String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
 
@@ -42,6 +50,12 @@ public class User implements UserDetails {
     public void update(User dados) {
         if (dados.name != null) {
             this.name = dados.name;
+        }
+        if (dados.login != null) {
+            this.login = dados.login;
+        }
+        if (dados.profile != null) {
+            this.profile = dados.profile;
         }
     }
 

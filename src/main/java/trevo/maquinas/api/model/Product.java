@@ -8,7 +8,6 @@ import lombok.Setter;
 import trevo.maquinas.api.dto.CategoryEnum;
 import trevo.maquinas.api.dto.ProductDadosDTO;
 import trevo.maquinas.api.dto.StatusEnum;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
@@ -23,11 +22,15 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
+    @Column(name = "price", unique = true, nullable = false)
     private Double price;
 
+    @Column(name = "description", unique = true, nullable = false)
     private String description;
+
 
     private CategoryEnum category;
 

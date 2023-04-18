@@ -19,7 +19,6 @@ import trevo.maquinas.api.response.ResponseModelToken;
 import trevo.maquinas.api.security.AuthenticationDTO;
 import trevo.maquinas.api.security.TokenService;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserService {
@@ -50,7 +49,7 @@ public class UserService {
         return new ResponseEntity<>(new ResponseModelObject("Lista de usuários", users), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> delete(UUID id) {
+    public ResponseEntity<?> delete(Long id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
             return new ResponseEntity<>(new ResponseModelMessage("Usuário foi deletado"), HttpStatus.OK);
@@ -58,7 +57,7 @@ public class UserService {
         return new ResponseEntity<>(new ResponseModelMessage("Usuário  não encontrado"), HttpStatus.BAD_REQUEST);
     }
 
-    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody @Valid User dados) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Valid User dados) {
         User user = userRepository.findById(id).orElse(null);
         if (userRepository.existsByLogin(dados.getName())) {
             return new ResponseEntity<>(new ResponseModelMessage("Usuário com nome " + dados.getName() + " já existe"), HttpStatus.BAD_REQUEST);
@@ -67,6 +66,9 @@ public class UserService {
             return new ResponseEntity<>(new ResponseModelMessage("Usuário não encontrado"), HttpStatus.BAD_REQUEST);
         }
         user.update(dados);
+        if (dados.getPassword() != null) {
+            dados.setPassword(encoder.encode(dados.getPassword()));
+        }
         userRepository.save(user);
         return new ResponseEntity<>(new ResponseModelObject("Usuário atualizado", user), HttpStatus.OK);
     }
