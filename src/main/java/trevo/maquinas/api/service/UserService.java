@@ -35,6 +35,9 @@ public class UserService {
     TokenService tokenService;
 
     public ResponseEntity<?> register(@RequestBody @Valid User dto) {
+        if (userRepository.existsByLogin(dto.getLogin())){
+            return new ResponseEntity<>(new ResponseModelMessage("Usuário já existe"), HttpStatus.BAD_REQUEST);
+        }
         dto.setPassword(encoder.encode(dto.getPassword()));
         User user = new User(dto);
         userRepository.save(user);
