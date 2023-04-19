@@ -1,28 +1,15 @@
-//package trevo.maquinas.api.repository;
-//
-//import org.junit.jupiter.api.Assertions;
-//import org.junit.jupiter.api.DisplayName;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-//import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-//import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.test.context.ActiveProfiles;
-//import trevo.maquinas.api.ApiApplication;
-//import trevo.maquinas.api.dto.ProductDadosDTO;
-//import trevo.maquinas.api.model.Product;
-//import java.util.Optional;
-//import static org.assertj.core.api.Assertions.assertThat;
-//
-////@SpringBootTest(classes = ApiApplication.class)
-////@DataJpaTest
-////@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-////@ActiveProfiles("test")
-////@SpringBootTest(classes = ApiApplication.class)
-////@MockitoSettings
+package trevo.maquinas.api.repository;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+//@SpringBootTest(classes = ApiApplication.class)
+//@DataJpaTest
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-////@ActiveProfiles("test")
+//@ActiveProfiles("test")
+//@SpringBootTest(classes = ApiApplication.class)
+//@MockitoSettings
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@ActiveProfiles("test")
 //@SpringBootTest(classes = ApiApplication.class)
 //@AutoConfigureMockMvc
 //public class RepositoryProductTest {
