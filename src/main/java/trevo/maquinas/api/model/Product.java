@@ -30,12 +30,13 @@ public class Product {
     @Column(name = "price", unique = true, nullable = false)
     private Double price;
 
-    @Column(name = "description", unique = true, nullable = false)
+    @Column(name = "description", unique = true, nullable = false, columnDefinition = "Text")
     private String description;
 
-
+    @Enumerated(EnumType.STRING)
     private CategoryEnum category;
 
+    @Enumerated(EnumType.STRING)
     private StatusEnum status;
 
     private String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
